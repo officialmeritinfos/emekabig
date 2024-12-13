@@ -23,7 +23,7 @@ class Dashboard extends Controller
             'pageName' => 'Admin Dashboard',
             'user'     =>  $user,
             'deposits'  => Deposit::where('status',1)->sum('amount'),
-            'pendingDeposit'=>Deposit::where('status','!=',1)->sum('amount'),
+            'pendingDeposit'=>Investment::where('status','!=',1)->sum('amount'),
             'withdrawals'=>Withdrawal::where('status',1)->sum('amount'),
             'pendingWithdrawal'=>Withdrawal::where('status','!=',1)->sum('amount'),
             'investments' => Investment::sum('amount'),
