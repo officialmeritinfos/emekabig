@@ -13,6 +13,7 @@ use App\Models\Withdrawal;
 use App\Notifications\InvestmentMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -22,8 +23,8 @@ class HomeController extends Controller
         $web = GeneralSetting::where('id',1)->first();
 
         //check if the referral is stored
-        if (!Cache::has('referral')){
-            Cache::put('referral',$request->get('referral'),now()->addDays(7));
+        if (!Cookie::has('referral')){
+            Cookie::queue('referral',$request->get('referral'), 60 * 24 * 7);
         }
 
         $dataView = [
